@@ -2,9 +2,9 @@ package main
 
 import (
 	"encoding/json"
-	"github.com/spf13/cast"
 	"log"
 	"net/http"
+	"strconv"
 )
 
 type Id int32
@@ -54,29 +54,26 @@ func init() {
 }
 
 func getZomanDetails(id Id) (Zoman, bool) {
-	z, ok := zomans[id]
-	return z, ok
+	z, found := zomans[id]
+	return z, found
 }
-
-
-
-
 
 type ZomanDetailsResponse struct {
 	Name    string `json:"name"`
-	Team    string `json"team"`
+	Team    string `json:"team2"`
 	College string `json:"college"`
 }
 
 func handleZomansApi(w http.ResponseWriter, r *http.Request) {
 	log.Printf("New request on %s", r.URL)
 	id := r.FormValue("id")
-	details, found := getZomanDetails(Id(cast.ToInt64(id)))
+	intId, _ := strconv.Atoi(id)
+	details, found := getZomanDetails(Id(intId))
 	if !found {
 		http.Error(w, "Invalid id", http.StatusInternalServerError)
 	} else {
 		response := ZomanDetailsResponse{details.Name, details.Team, details.College}
-		json.NewEncoder(w).Encode(response)
+		j := json.NewEncoder(w)
+		j.Encode(response)
 	}
-
 }

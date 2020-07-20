@@ -14,8 +14,10 @@ type IndexPageData struct {
 
 func main() {
 	log.Println("Application started successfully")
+
 	//Routes
 	http.HandleFunc("/hello", handleIndexPage)
+	http.HandleFunc("/zoman", handleZomansApi)
 
 	// blocking call
 	// starts the server
