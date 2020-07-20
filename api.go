@@ -17,13 +17,7 @@ type Zoman struct {
 	Team    string
 }
 
-type ZomanDetailsResponse struct {
-	Name    string `json:"name"`
-	Team    string `json"team"`
-	College string `json:"college"`
-}
-
-//in memory database
+// in-memory database
 var zomans map[Id]Zoman
 
 func init() {
@@ -62,6 +56,16 @@ func init() {
 func getZomanDetails(id Id) (Zoman, bool) {
 	z, ok := zomans[id]
 	return z, ok
+}
+
+
+
+
+
+type ZomanDetailsResponse struct {
+	Name    string `json:"name"`
+	Team    string `json"team"`
+	College string `json:"college"`
 }
 
 func handleZomansApi(w http.ResponseWriter, r *http.Request) {
