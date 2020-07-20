@@ -15,15 +15,14 @@ type IndexPageData struct {
 
 func main() {
 	log.Println("Application started successfully")
-	http.HandleFunc("/hello", indexPage)
-	http.HandleFunc("/zoman", handleZomansApi)
+	http.HandleFunc("/hello", handleIndexPage)
 	err := http.ListenAndServe(":8080", nil)
 	if err != nil {
 		log.Fatalf("Failed to start the app. Error: %s", err)
 	}
 }
 
-func indexPage(w http.ResponseWriter, r *http.Request) {
+func handleIndexPage(w http.ResponseWriter, r *http.Request) {
 	data := IndexPageData{Name: "Zoman", Time: time.Now().Format(time.Stamp)}
 	html := template.Must(template.ParseFiles("templates/index.html"))
 	name := r.FormValue("name")
