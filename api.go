@@ -67,6 +67,7 @@ type ZomanDetailsResponse struct {
 func handleZomansApi(w http.ResponseWriter, r *http.Request) {
 	log.Printf("New request on %s", r.URL)
 	id := r.FormValue("id")
+	//help
 	intId, _ := strconv.Atoi(id)
 	details, found := getZomanDetails(Id(intId))
 	if !found {

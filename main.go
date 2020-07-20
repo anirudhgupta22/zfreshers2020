@@ -15,6 +15,8 @@ type IndexPageData struct {
 func main() {
 	log.Println("Application started successfully")
 
+
+	//helllo
 	//Routes
 	http.HandleFunc("/hello", handleIndexPage)
 	http.HandleFunc("/zoman", handleZomansApi)
