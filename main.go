@@ -15,7 +15,8 @@ type IndexPageData struct {
 
 func main() {
 	log.Println("Application started successfully")
-	http.HandleFunc("/hellom", indexPage)
+	http.HandleFunc("/hello", indexPage)
+	http.HandleFunc("/zoman", handleZomansApi)
 	err := http.ListenAndServe(":8080", nil)
 	if err != nil {
 		log.Fatalf("Failed to start the app. Error: %s", err)
